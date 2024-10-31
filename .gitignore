@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Poetry
+.venv/
+dist/
+
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Build output
+build/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# Sphinx documentation
+docs/_build/
+
+# Translations
+*.mo
+*.pot
+
+# Django
+*.sqlite3
