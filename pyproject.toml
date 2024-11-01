@@ -5,6 +5,13 @@ description = "A command-line tool to unpack backup files with decryption and de
 authors = ["Ahmad Zubair Zahid"]
 readme = "README.md"
 license = "MIT"
+homepage = "https://github.com/zahidaz/bakdroid"
+repository = "https://github.com/zahidaz/bakdroid"
+keywords = ["backup", "decryption", "compression", "cli", "tool", "android", "android backup"]
+
+packages = [
+  { include = "bakdroid" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.13"
