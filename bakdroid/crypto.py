@@ -59,6 +59,9 @@ def _extract_master_key(blob: bytes) -> tuple[bytes, bytes, bytes]:
     return iv, key, checksum
 
 
+def _calculate_checksum(key: bytes, salt: bytes, rounds: int, use_utf8: bool) -> bytes:
+    return _pbkdf2(key, salt, rounds)
+
 def decrypt(
     header: Header,
     data: bytes,
@@ -72,7 +75,11 @@ def decrypt(
     ) # decrypt master key blob
 
     iv, key, checksum = _extract_master_key(blob)
-    
-    # TODO: confirm checksum
+    calculated_checksum = _calculate_checksum(key, header.master_key_checksum_salt, header.rounds, False)
+
+    # if checksum != calculated_checksum:
+    #     logger.error(f"Checksum mismatch {checksum = }, {calculated_checksum = }")
+    #     logger.error("Ensure you are using the correct password or the file is not corrupted")
+    #     raise ValueError("Checksum mismatch")
 
     return _decrypt_aes(iv, key, data)

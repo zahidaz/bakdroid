@@ -1,7 +1,11 @@
 from importlib import metadata
 import click
 from pathlib import Path
+import logging
 
+logging.basicConfig(level=logging.INFO)
+
+logger = logging.getLogger(__name__)
 
 __version__ = metadata.version(__package__ or __name__)
 
@@ -18,8 +22,9 @@ def cli(ctx):
 @cli.command()
 @click.argument('input_file', type=click.Path(exists=True, path_type=Path))
 @click.argument('output_file', type=click.Path(path_type=Path))
-@click.option('--password', prompt=True, hide_input=True, help='Password for decryption')
-def unpack(input_file: Path, output_file: Path, password: str):
+@click.option('--password', '-p', help='Password to decrypt the backup file')
+@click.option('--verbose', '-v', is_flag=True, help='Enable verbose output')
+def unpack(input_file: Path, output_file: Path, password: str, verbose: bool):
     """
     Unpack a backup file.
 
@@ -27,8 +32,18 @@ def unpack(input_file: Path, output_file: Path, password: str):
     OUTPUT_FILE: Path to the output tar file
     """
     from bakdroid.unpacker import Unpacker
-    Unpacker(input_file, output_file).unpack(password)
-    click.echo(f"Unpacked {input_file} to {output_file}")
+    
+    if verbose:
+        logging.basicConfig(level=logging.DEBUG)
+
+    try:
+        Unpacker(input_file, output_file).unpack(password)
+        click.echo(f"Unpacked {input_file} to {output_file}")
+    except Exception as e:
+        if verbose:
+            logger.exception(e)
+        click.echo(f"Error: {e}")
+        exit(1)
 
 if __name__ == "__main__":
     cli()

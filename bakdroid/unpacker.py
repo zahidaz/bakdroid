@@ -19,7 +19,7 @@ class Unpacker:
         with self._in_file.open("rb") as f:
             self.header: Header = self._read_header(f)
 
-            # logger.debug(self.header)
+            logger.debug(self.header)
 
             data = f.read()
             if self.header.is_encrypted:
@@ -56,7 +56,6 @@ class Unpacker:
                 header.rounds = int(header_lines[6])
                 header.user_key_iv = bytes.fromhex(header_lines[7])
                 header.master_iv_key_blob = bytes.fromhex(header_lines[8])
-                print(header_lines[8])
             return header
 
         except (IndexError, ValueError, TypeError) as e:
