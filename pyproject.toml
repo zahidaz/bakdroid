@@ -1,18 +1,18 @@
 [tool.poetry]
 name = "bakdroid"
 version = "0.1.0"
-description = ""
-authors = ["None"]
+description = "A command-line tool to unpack backup files with decryption and decompression support."
+authors = ["Ahmad Zubair Zahid"]
 readme = "README.md"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.13"
 cryptography = "^43.0.3"
 click = "^8.1.7"
 
-
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
