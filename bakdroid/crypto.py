@@ -77,9 +77,8 @@ def decrypt(
     iv, key, checksum = _extract_master_key(blob)
     calculated_checksum = _calculate_checksum(key, header.master_key_checksum_salt, header.rounds, False)
 
-    # if checksum != calculated_checksum:
-    #     logger.error(f"Checksum mismatch {checksum = }, {calculated_checksum = }")
-    #     logger.error("Ensure you are using the correct password or the file is not corrupted")
-    #     raise ValueError("Checksum mismatch")
+    if checksum != calculated_checksum:
+        logger.debug(f"Checksum Mismatch {checksum = }, {calculated_checksum = }")
+        raise ValueError("Checksum Mismatch: Wrong Password or Corrupted Backup File")
 
     return _decrypt_aes(iv, key, data)
