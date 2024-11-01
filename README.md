@@ -1,6 +1,6 @@
 # Bakdroid
 
-**Bakdroid** is a command-line tool for unpacking backup files with support for decryption and decompression. It ensures your backup data remains secure and easily accessible.
+**Bakdroid** is a command-line tool for unpacking backup files with support for decryption and decompression.
 
 ## Features
 
